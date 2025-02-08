@@ -1,0 +1,9 @@
+<!-- templates/profile.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>个人中心</h2>
+<p><strong>用户名：</strong>{{ user.username }}</p>
+<p><strong>个性标签：</strong>{{ user.personality or "未进行测评" }}</p>
+<!-- 你可以在这里添加旅行足迹、偏好等展示内容 -->
+<a href="{{ url_for('personality') }}" class="btn btn-info">重新测评</a>
+{% endblock %}

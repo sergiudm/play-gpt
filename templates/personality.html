@@ -1,0 +1,29 @@
+<!-- templates/personality.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>性格测评</h2>
+<form method="post">
+    <div class="form-group">
+        <label>1. 你更倾向于哪种消费方式？</label>
+        <select name="answer1" class="form-control">
+            <option value="低消费">低消费</option>
+            <option value="高消费">高消费</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>2. 你更喜欢哪种旅行方式？</label>
+        <select name="answer2" class="form-control">
+            <option value="独自旅行">独自旅行</option>
+            <option value="团体旅行">团体旅行</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>3. 你喜欢的旅行节奏是？</label>
+        <select name="answer3" class="form-control">
+            <option value="快节奏">快节奏</option>
+            <option value="慢节奏">慢节奏</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">提交测评</button>
+</form>
+{% endblock %}
