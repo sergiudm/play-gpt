@@ -1,0 +1,38 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PlayGPT - 定制化玩乐方案</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{{ url_for('index') }}">PlayGPT</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">个人中心</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('chat') }}">聊天</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">退出</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">登录</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">注册</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-info">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

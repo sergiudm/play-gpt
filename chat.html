@@ -1,0 +1,42 @@
+<!-- templates/chat.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>聊天</h2>
+<div id="chat-box" style="height:300px; overflow-y:scroll; border:1px solid #ccc; padding:10px;"></div>
+<form id="chat-form">
+    <div class="form-group">
+        <input type="text" id="message-input" class="form-control" placeholder="请输入需求，比如：周六下午在深圳南山区放松的方案">
+    </div>
+    <button type="submit" class="btn btn-success">发送</button>
+</form>
+
+<script>
+document.getElementById('chat-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var message = document.getElementById('message-input').value;
+    if(!message) return;
+    // 在聊天框中显示用户输入
+    var chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML += "<p><strong>我：</strong>" + message + "</p>";
+    // 发送请求到后端接口
+    fetch("{{ url_for('api_chat') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.result) {
+            chatBox.innerHTML += "<p><strong>助手：</strong>" + data.result + "</p>";
+        } else {
+            chatBox.innerHTML += "<p><strong>助手：</strong>出现错误：" + data.error + "</p>";
+        }
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(err => console.error(err));
+    document.getElementById('message-input').value = "";
+});
+</script>
+{% endblock %}
