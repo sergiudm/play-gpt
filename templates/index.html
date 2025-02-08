@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PlayGPT 首页</title>
+    <!-- 引入 Bootstrap 样式（你可以放在 static/css 目录下，也可以直接使用 CDN） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">欢迎使用 PlayGPT</h1>
+        <p class="lead text-center">通过AI为您提供定制化的玩乐方案！</p>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('login') }}" class="btn btn-primary mr-2">登录</a>
+            <a href="{{ url_for('register') }}" class="btn btn-success">注册</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -152,7 +152,7 @@ def api_chat():
 
 
 # 初始化数据库（首次运行时使用）
-@app.before_first_request
+@app.before_request
 def create_tables():
     db.create_all()
 

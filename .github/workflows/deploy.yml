@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 当 push 到 main 分支时触发部署
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 如果你的静态文件放在 docs 文件夹下，可以跳过下面的构建步骤，
+      # 直接将 docs 作为发布目录；否则下面示例将 index.html 文件复制到 output 目录。
+      - name: Build static site
+        run: |
+          mkdir -p output
+          cp -R index.html output/
+          # 如果有其他静态资源，请一并复制，如：
+          # cp -R static/ output/static/
+
+      # 使用 peaceiris/actions-gh-pages 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
