@@ -118,14 +118,14 @@ def profile():
 
 # 对话页面（展示对话框）
 @app.route("/chat")
-@login_required
+#@login_required #TODO: Uncomment this line to enable login required
 def chat():
     return render_template("chat.html")
 
 
 # API 接口：根据用户输入生成定制化出行方案
 @app.route("/api/chat", methods=["POST"])
-@login_required
+#@login_required #TODO: Uncomment this line to enable login required
 def api_chat():
     data = request.get_json()
     user_query = data.get("message")
